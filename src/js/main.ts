@@ -1,4 +1,4 @@
-import { TodoList } from "./todo";
+import { TodoList } from "./Todo";
 
 const todoList = new TodoList();
 //Eventlyssnare som hindrar formuläret att hanteras som "vanligt" och vid klick på knappen så körs funktionen addTodo
