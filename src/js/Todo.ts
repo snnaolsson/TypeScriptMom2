@@ -48,9 +48,15 @@ export class TodoList implements ITodo {
       return JSON.parse(storedTodos);
     }
   }
+
   //metod för att radera enskilda todos
   public deleteTodo(index: number): void {
     this.todos.splice(index, 1);
     this.saveToLocalStorage();
+  }
+
+  //metod för att rensa localstorage
+  public clearStorage(): void {
+    localStorage.clear();
   }
 }

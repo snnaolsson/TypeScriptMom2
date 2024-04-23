@@ -2,7 +2,7 @@ import { TodoList } from "./todo";
 import { ITodo } from "./ITodo";
 
 const todoList = new TodoList();
-
+//Eventlyssnare som hindrar formuläret att hanteras som "vanligt" och vid klick på knappen så körs funktionen addTodo
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("todoForm")! as HTMLFormElement;
   form.addEventListener("submit", (event) => {
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     addTodo();
   });
 });
-
+//Lägger till ny todo med input från DOM till todoList och kör funktionen printTodos
 function addTodo(): void {
   const todoInput = document.getElementById("task") as HTMLInputElement;
   const prioInput = document.getElementById("prio") as HTMLInputElement;
@@ -22,15 +22,8 @@ function addTodo(): void {
   printTodos();
 }
 
-const clearList = document.getElementById("deleteAllBtn") as HTMLButtonElement;
-clearList.addEventListener("click", () => {
-  localStorage.clear();
-  printTodos();
-});
-
+//Skriver ut todos till DOM, sorterade på prio samt om de är avklarade eller ej.
 function printTodos() {
-  let todoArr = todoList.loadfromLocalStorage();
-  console.log(todoArr);
   const theTodos = todoList.getTodos();
   const listOfTodos = document.getElementById(
     "todoUlElement"
@@ -85,25 +78,21 @@ function printTodos() {
     });
   }
 }
-
+//raderar todo
 function deleteTodo(index: number): void {
   todoList.deleteTodo(index);
   printTodos();
 }
 printTodos();
 
-/*function markTodoCompleted(index: number) {
-  let liEl = document.getElementById(`"li${index}"`) as HTMLElement;
-  todoList.markTodoCompleted(index);
-  if ((todoList.completed = true)) {
-    console.log(liEl);
-    if (liEl) {
-      liEl.className = "overlined";
-    }
-  }
-  printTodos();
-}*/
-function ani(): void {
-  const ani = document.getElementById("ani") as HTMLDivElement;
-  ani.className = "displayDiv";
+//rensar localstorage samt DOM
+const clearList = document.getElementById("deleteAllBtn") as HTMLButtonElement;
+clearList.addEventListener("click", () => clearStorage());
+
+function clearStorage(): void {
+  todoList.clearStorage();
+  const listOfTodos = document.getElementById(
+    "todoUlElement"
+  ) as HTMLUListElement;
+  listOfTodos.innerHTML = "";
 }
