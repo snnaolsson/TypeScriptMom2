@@ -64,7 +64,6 @@ function printTodos() {
       check.addEventListener("click", () => {
         todoList.markTodoCompleted(index);
         printTodos();
-        ani();
       });
       li.appendChild(prio);
       li.appendChild(taskInpu);
